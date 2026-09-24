@@ -1,5 +1,8 @@
 rootProject.name = "Chirp"
 
+// 开启类型安全项目访问器特性
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     repositories {
         google {
