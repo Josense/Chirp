@@ -65,7 +65,7 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.material3)
             implementation(compose.ui)
-            implementation("org.jetbrains.compose.components:components-ui-tooling-preview:${libs.versions.compose.multiplatform.get()}")
+            implementation(libs.jetbrains.compose.ui.tooling.preview)
             implementation(compose.components.resources)
             implementation(libs.jetbrains.compose.viewmodel)
             implementation(libs.jetbrains.lifecycle.compose)
