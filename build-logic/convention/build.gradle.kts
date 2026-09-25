@@ -25,3 +25,18 @@ kotlin {
     }
 }
 
+tasks {
+    validatePlugins {
+        enableStricterValidation = true
+        failOnWarning = true
+    }
+}
+
+gradlePlugin {
+    plugins {
+        register("androidApplication") {
+            id = "com.josense.convention.android.application"
+            implementationClass = "AndroidApplicationConventionPlugin"
+        }
+    }
+}
