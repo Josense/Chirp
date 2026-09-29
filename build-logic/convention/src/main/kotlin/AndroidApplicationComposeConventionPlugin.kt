@@ -11,10 +11,10 @@ class AndroidApplicationComposeConventionPlugin: Plugin<Project> {
             with(pluginManager) {
                 apply("com.josense.convention.android.application")
                 apply("org.jetbrains.kotlin.plugin.compose")
-
-                val extension = extensions.getByType<ApplicationExtension>()
-                configureAndroidCompose(extension)
             }
+
+            val extension = extensions.getByType<ApplicationExtension>()
+            configureAndroidCompose(extension)
         }
     }
 }
