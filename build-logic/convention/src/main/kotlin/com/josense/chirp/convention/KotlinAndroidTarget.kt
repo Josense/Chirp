@@ -9,23 +9,21 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 internal fun Project.configureAndroidTarget() {
     extensions.configure<KotlinMultiplatformExtension> {
         androidLibrary {
-            namespace = "com.josense.chirp.shared"
+            namespace = this@configureAndroidTarget.pathToPackageName()
             compileSdk = libs.findVersion("projectCompileSdkVersion").get().toString().toInt()
             minSdk = libs.findVersion("projectMinSdkVersion").get().toString().toInt()
-
-            compilerOptions {
-                jvmTarget.set(JvmTarget.JVM_17)
-            }
             androidResources {
                 enable = true
             }
-            withHostTest {
-                isIncludeAndroidResources = true
-            }
-            withDeviceTestBuilder {
-                sourceSetTreeName = "test"
-            }.configure {
-                instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+            experimentalProperties["android.experimental.kmp.enableAndroidResources"] = "true"
+            experimentalProperties["android.experimental.kmp.resourcePrefix"] = this@configureAndroidTarget.pathToResourcePrefix()
+            experimentalProperties["android.resourcePrefix"] = this@configureAndroidTarget.pathToResourcePrefix()
+
+            withDeviceTest { }
+            withHostTest { }
+
+            compilerOptions {
+                jvmTarget.set(JvmTarget.JVM_17)
             }
         }
     }
