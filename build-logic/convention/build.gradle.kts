@@ -54,5 +54,15 @@ gradlePlugin {
             id = "com.josense.convention.kmp.library"
             implementationClass = "KmpLibraryConventionPlugin"
         }
+
+        register("cmpLibrary") {
+            id = "com.josense.convention.cmp.library"
+            implementationClass = "CmpLibraryConventionPlugin"
+        }
+
+        register("cmpFeature") {
+            id = "com.josense.convention.cmp.feature"
+            implementationClass = "CmpFeatureConventionPlugin"
+        }
     }
 }
