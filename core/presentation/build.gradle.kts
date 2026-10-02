@@ -17,6 +17,8 @@ kotlin {
                 implementation(projects.core.domain)
 
                 implementation(compose.components.resources)
+                implementation(libs.jetbrains.lifecycle.compose)
+                implementation(libs.jetbrains.lifecycle.viewmodel)
             }
         }
 
