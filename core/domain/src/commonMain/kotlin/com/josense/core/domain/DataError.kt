@@ -3,7 +3,7 @@ package com.josense.core.domain
 sealed interface DataError: Error {
     enum class Remote {
         BAD_REQUEST,
-        TIMEOUT,
+        REQUEST_TIMEOUT,
         UNAUTHORIZED,
         FORBIDDEN,
         NOT_FOUND,
@@ -12,7 +12,7 @@ sealed interface DataError: Error {
         NO_INTERNET,
         PAYLOAD_TOO_LARGE,
         SERVER_ERROR,
-        UNAVAILABLE,
+        SERVICE_UNAVAILABLE,
         SERIALIZATION,
         UNKNOWN,
         ;
