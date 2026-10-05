@@ -1,15 +1,9 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     alias(libs.plugins.convention.cmp.application)
 }
 
 kotlin {
     sourceSets {
-        androidMain.dependencies {
-            implementation(libs.androidx.compose.ui.tooling.preview)
-            implementation(libs.androidx.compose.ui.tooling)
-        }
         commonMain.dependencies {
             implementation(projects.core.designsystem)
             implementation(projects.core.domain)
@@ -27,7 +21,7 @@ kotlin {
 
             implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(compose.material3)
+            implementation(libs.jetbrains.compose.material3)
             implementation(compose.ui)
             implementation(libs.jetbrains.compose.ui.tooling.preview)
             implementation(compose.components.resources)
@@ -38,4 +32,8 @@ kotlin {
             implementation(libs.kotlin.test)
         }
     }
+}
+
+dependencies {
+    androidRuntimeClasspath(libs.jetbrains.compose.ui.tooling)
 }

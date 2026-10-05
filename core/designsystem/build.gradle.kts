@@ -11,7 +11,7 @@ kotlin {
                 implementation(libs.kotlin.stdlib)
 
                 implementation(compose.components.resources)
-                implementation(compose.components.uiToolingPreview)
+                implementation(libs.jetbrains.compose.ui.tooling.preview)
 
             }
         }
@@ -49,4 +49,8 @@ kotlin {
         }
     }
 
+}
+
+dependencies {
+    androidRuntimeClasspath(libs.jetbrains.compose.ui.tooling)
 }

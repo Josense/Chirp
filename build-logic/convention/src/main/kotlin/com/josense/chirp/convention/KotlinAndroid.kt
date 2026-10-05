@@ -1,15 +1,12 @@
 package com.josense.chirp.convention
 
-import com.android.build.api.dsl.CommonExtension
+import com.android.build.api.dsl.ApplicationExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.withType
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 internal fun Project.configureKotlinAndroid(
-    commonExtension: CommonExtension<*, *, *, *, *, *>,
+    commonExtension: ApplicationExtension,
 ) {
     with(commonExtension) {
         compileSdk = libs.findVersion("projectCompileSdkVersion").get().toString().toInt()
@@ -21,23 +18,9 @@ internal fun Project.configureKotlinAndroid(
             isCoreLibraryDesugaringEnabled = true
         }
 
-        configureKotlin()
-
         dependencies {
             "coreLibraryDesugaring"(libs.findLibrary("android-desugarJdkLibs").get())
         }
 
-    }
-}
-
-internal fun Project.configureKotlin() {
-    tasks.withType<KotlinCompile>().configureEach {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_17)
-
-            freeCompilerArgs.add(
-                "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
-            )
-        }
     }
 }

@@ -2,10 +2,10 @@ package com.josense.core.designsystem.components.buttons
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -21,10 +21,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.josense.core.designsystem.theme.ChirpTheme
 import com.josense.core.designsystem.theme.extended
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 enum class ChirpButtonStyle {
     PRIMARY,
@@ -118,23 +118,25 @@ fun ChirpButton(
         colors = style.toButtonColors(),
         border = style.toButtonBorder(enabled),
     ) {
-        CircularProgressIndicator(
-            modifier = Modifier.size(15.dp)
-                .alpha(if (isLoading) 1F else 0F),
-            strokeWidth = 1.5.dp,
-            color = Color.Black
-        )
-
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.alpha(if (isLoading) 0F else 1F)
-        ) {
-            leadingIcon?.invoke()
-            Text(
-                text = text,
-                style = MaterialTheme.typography.titleSmall
+        Box(contentAlignment = Alignment.Center) {
+            CircularProgressIndicator(
+                modifier = Modifier.size(15.dp)
+                    .alpha(if (isLoading) 1F else 0F),
+                strokeWidth = 1.5.dp,
+                color = Color.Black
             )
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.alpha(if (isLoading) 0F else 1F)
+            ) {
+                leadingIcon?.invoke()
+                Text(
+                    text = text,
+                    style = MaterialTheme.typography.titleSmall
+                )
+            }
         }
     }
 }
@@ -143,35 +145,78 @@ fun ChirpButton(
 @Preview
 fun ChirpButtonPreview() {
     ChirpTheme {
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            val styleCount = ChirpButtonStyle.entries.size
-            val enableStatusCount = 2
-            val isLoadingStatusCount = 2
-            val leadingStatusCount = 2
-            items(
-                count = styleCount * enableStatusCount * isLoadingStatusCount * leadingStatusCount
-            ) { index ->
-                ChirpButton(
-                    text = "Hello world",
-                    onClick = {},
-                    style = ChirpButtonStyle.entries[index % styleCount],
-                    enabled = index % enableStatusCount == 0,
-                    isLoading = index % isLoadingStatusCount == 0,
-                ) {
-                    if (index % leadingStatusCount == 0) {
-                        Icon(
-                            imageVector = Icons.Filled.Home,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onSurface
-                        )
-                    }
-                }
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            ChirpButton(
+                text = "Hello world",
+                onClick = {},
+                style = ChirpButtonStyle.PRIMARY,
+                enabled = true,
+                isLoading = false,
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Home,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurface
+                )
             }
+
+            ChirpButton(
+                text = "Hello world",
+                onClick = {},
+                style = ChirpButtonStyle.DESTRUCTIVE_PRIMARY,
+                enabled = true,
+                isLoading = false,
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Home,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurface
+                )
+            }
+
+            ChirpButton(
+                text = "Hello world",
+                onClick = {},
+                style = ChirpButtonStyle.SECONDARY,
+                enabled = true,
+                isLoading = false,
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Home,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurface
+                )
+            }
+
+            ChirpButton(
+                text = "Hello world",
+                onClick = {},
+                style = ChirpButtonStyle.DESTRUCTIVE_SECONDARY,
+                enabled = true,
+                isLoading = false,
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Home,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurface
+                )
+            }
+
+            ChirpButton(
+                text = "Hello world",
+                onClick = {},
+                style = ChirpButtonStyle.TEXT,
+                enabled = true,
+                isLoading = false,
+            )
+
+            ChirpButton(
+                text = "Hello world",
+                onClick = {},
+                style = ChirpButtonStyle.TEXT,
+                enabled = false,
+                isLoading = true,
+            )
         }
     }
 }
-

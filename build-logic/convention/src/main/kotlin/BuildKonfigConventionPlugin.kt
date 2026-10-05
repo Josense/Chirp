@@ -1,11 +1,10 @@
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.codingfeline.buildkonfig.compiler.FieldSpec
 import com.codingfeline.buildkonfig.gradle.BuildKonfigExtension
 import com.josense.chirp.convention.pathToPackageName
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.internal.Actions.with
 import org.gradle.kotlin.dsl.configure
+import java.util.Properties
 
 class BuildKonfigConventionPlugin: Plugin<Project> {
 
@@ -18,8 +17,13 @@ class BuildKonfigConventionPlugin: Plugin<Project> {
             extensions.configure<BuildKonfigExtension> {
                 packageName = target.pathToPackageName()
                 defaultConfigs {
-                    val apiKey = gradleLocalProperties(rootDir, rootProject.providers)
-                        .getProperty("API_KEY")
+                    val localPropertiesFile = rootProject.file("local.properties")
+                    val localProperties = Properties().apply {
+                        if (localPropertiesFile.isFile) {
+                            localPropertiesFile.inputStream().use(::load)
+                        }
+                    }
+                    val apiKey = localProperties.getProperty("API_KEY")
                         ?: throw IllegalStateException("Missing API_KEY property in local.properties")
                     buildConfigField(FieldSpec.Type.STRING, "API_KEY", apiKey)
                 }
