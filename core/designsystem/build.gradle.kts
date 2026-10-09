@@ -10,6 +10,8 @@ kotlin {
             dependencies {
                 implementation(libs.kotlin.stdlib)
 
+                implementation(projects.core.presentation)
+
                 implementation(compose.components.resources)
                 implementation(libs.jetbrains.compose.ui.tooling.preview)
 
