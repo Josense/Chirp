@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -118,7 +119,10 @@ fun ChirpButton(
         colors = style.toButtonColors(),
         border = style.toButtonBorder(enabled),
     ) {
-        Box(contentAlignment = Alignment.Center) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.padding(6.dp)
+        ) {
             CircularProgressIndicator(
                 modifier = Modifier.size(15.dp)
                     .alpha(if (isLoading) 1F else 0F),

@@ -39,7 +39,7 @@ sealed interface UiText {
      * 的环境变量（如 CompositionLocal）隐式获取上下文并自动响应语言切换。
      */
     @Composable
-    fun UiText.asString(): String {
+    fun asString(): String {
         return when(this) {
             is DynamicString -> value
             is Resource -> stringResource(id, *args)

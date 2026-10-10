@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -33,6 +35,7 @@ fun ChirpSurface(
         color = MaterialTheme.colorScheme.background,
         modifier = modifier
     ) {
+        val scrollState = rememberScrollState()
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
@@ -51,7 +54,9 @@ fun ChirpSurface(
             ) {
                 Column(
                     modifier = Modifier
+                        .padding(16.dp)
                         .fillMaxSize()
+                        .verticalScroll(scrollState)
                 ) {
                     content()
                 }
