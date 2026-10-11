@@ -3,7 +3,7 @@ package com.josense.core.data.logging
 import co.touchlab.kermit.Logger
 import com.josense.core.domain.logging.ChirpLogger
 
-class KermitLogger: ChirpLogger {
+object KermitLogger: ChirpLogger {
     override fun debug(message: String) {
         Logger.d(message)
     }

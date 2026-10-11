@@ -1,5 +1,6 @@
 package com.josense.feature.auth.presentation.register
 
+import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import chirp.feature.auth.presentation.generated.resources.Res
@@ -18,6 +19,8 @@ import com.josense.feature.auth.domain.validation.EmailValidator
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
@@ -37,6 +40,7 @@ class RegisterViewModel(
     val state = _state
         .onStart {
             if (!hasLoadedInitialData) {
+                observeValidateState()
                 hasLoadedInitialData = true
             }
         }.stateIn(
@@ -45,6 +49,21 @@ class RegisterViewModel(
             initialValue = RegisterState()
         )
 
+    private fun observeValidateState() {
+        combine(
+            snapshotFlow { state.value.emailTextState.text.toString() },
+            snapshotFlow { state.value.usernameTextState.text.toString() },
+            snapshotFlow { state.value.passwordTextState.text.toString() },
+            snapshotFlow { state.value.isRegistering }
+        ) { email, username, password, isRegistering ->
+            _state.update {
+                it.copy(
+                    canRegister = email.isNotEmpty() && username.isNotEmpty()
+                            && password.isNotEmpty() && isRegistering.not()
+                )
+            }
+        }.launchIn(viewModelScope)
+    }
 
     fun onAction(action: RegisterAction) {
         when (action) {

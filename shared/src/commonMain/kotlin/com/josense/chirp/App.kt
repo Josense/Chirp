@@ -9,6 +9,6 @@ import com.josense.feature.auth.presentation.register.RegisterRoot
 @Preview
 fun App() {
     ChirpTheme {
-        RegisterRoot()
+        RegisterRoot(onRegisterSuccess = {})
     }
 }

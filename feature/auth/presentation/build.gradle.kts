@@ -22,6 +22,8 @@ kotlin {
 
                 implementation(compose.components.resources)
                 implementation(libs.jetbrains.compose.ui.tooling.preview)
+
+                implementation(libs.bundles.koin.common)
             }
         }
 

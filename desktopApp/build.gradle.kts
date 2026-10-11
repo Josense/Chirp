@@ -11,6 +11,8 @@ dependencies {
 
     implementation(compose.desktop.currentOs)
     implementation(libs.kotlinx.coroutines.swing)
+    implementation(libs.koin.core)
+    implementation(libs.koin.logger.slf4j)
 }
 
 compose.desktop {
