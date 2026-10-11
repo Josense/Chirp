@@ -1,7 +1,7 @@
 package com.josense.core.domain
 
 sealed interface DataError: Error {
-    enum class Remote {
+    enum class Remote: DataError {
         BAD_REQUEST,
         REQUEST_TIMEOUT,
         UNAUTHORIZED,
@@ -18,9 +18,9 @@ sealed interface DataError: Error {
         ;
     }
 
-    enum class Local {
+    enum class Local: DataError {
         DISK_FULL,
-        FILE_NOT_FOUND,
+        NOT_FOUND,
         UNKNOWN,
         ;
     }
