@@ -12,6 +12,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.TextObfuscationMode
 import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.foundation.text.input.TextFieldDecorator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -74,50 +75,53 @@ fun ChirpPasswordTextField(
             ),
             interactionSource = interactionSource,
             cursorBrush = SolidColor(MaterialTheme.colorScheme.onSurface),
-            decorator = { innerBox ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Box(
+            decorator = object : TextFieldDecorator {
+                @Composable
+                override fun Decoration(innerTextField: @Composable () -> Unit) {
+                    Row(
                         modifier = Modifier
-                            .weight(1f),
-                        contentAlignment = Alignment.CenterStart
+                            .fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        if(state.text.isEmpty() && placeholder != null) {
-                            Text(
-                                text = placeholder,
-                                color = MaterialTheme.colorScheme.extended.textPlaceholder,
-                                style = MaterialTheme.typography.bodyMedium
-                            )
+                        Box(
+                            modifier = Modifier
+                                .weight(1f),
+                            contentAlignment = Alignment.CenterStart
+                        ) {
+                            if(state.text.isEmpty() && placeholder != null) {
+                                Text(
+                                    text = placeholder,
+                                    color = MaterialTheme.colorScheme.extended.textPlaceholder,
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                            }
+                            innerTextField()
                         }
-                        innerBox()
-                    }
 
-                    Icon(
-                        imageVector = if(isPasswordVisible) {
-                            vectorResource(Res.drawable.eye_off_icon)
-                        } else {
-                            vectorResource(Res.drawable.eye_icon)
-                        },
-                        contentDescription = if(isPasswordVisible) {
-                            stringResource(Res.string.hide_password)
-                        } else {
-                            stringResource(Res.string.show_password)
-                        },
-                        tint = MaterialTheme.colorScheme.extended.textDisabled,
-                        modifier = Modifier
-                            .size(24.dp)
-                            .clickable(
-                                interactionSource = remember { MutableInteractionSource() },
-                                indication = ripple(
-                                    bounded = false,
-                                    radius = 24.dp
+                        Icon(
+                            imageVector = if(isPasswordVisible) {
+                                vectorResource(Res.drawable.eye_off_icon)
+                            } else {
+                                vectorResource(Res.drawable.eye_icon)
+                            },
+                            contentDescription = if(isPasswordVisible) {
+                                stringResource(Res.string.hide_password)
+                            } else {
+                                stringResource(Res.string.show_password)
+                            },
+                            tint = MaterialTheme.colorScheme.extended.textDisabled,
+                            modifier = Modifier
+                                .size(24.dp)
+                                .clickable(
+                                    interactionSource = remember { MutableInteractionSource() },
+                                    indication = ripple(
+                                        bounded = false,
+                                        radius = 24.dp
+                                    ),
+                                    onClick = onToggleVisibilityClick
                                 ),
-                                onClick = onToggleVisibilityClick
-                            )
-                    )
+                        )
+                    }
                 }
             }
         )

@@ -12,3 +12,6 @@ fun initKoin(config: KoinAppDeclaration? = null) {
         modules(coreDataModule, authPresentationModule)
     }
 }
+
+/** Entry point for the iOS application. */
+fun doInitKoin() = initKoin()
