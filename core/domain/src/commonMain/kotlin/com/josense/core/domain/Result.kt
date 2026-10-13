@@ -12,7 +12,7 @@ fun <T, E: Error, R> Result<T, E>.map(f: (T) -> R): Result<R, E> {
     }
 }
 
-fun <T, E: Error> Result<T, E>.onSuccess(action: (T) -> Unit): Result<T, E> {
+inline fun <T, E: Error> Result<T, E>.onSuccess(action: (T) -> Unit): Result<T, E> {
     return when (this) {
         is Result.Success -> {
             action(this.data)
@@ -22,7 +22,7 @@ fun <T, E: Error> Result<T, E>.onSuccess(action: (T) -> Unit): Result<T, E> {
     }
 }
 
-fun <T, E: Error> Result<T, E>.onFailure(action: (E) -> Unit): Result<T, E> {
+inline fun <T, E: Error> Result<T, E>.onFailure(action: (E) -> Unit): Result<T, E> {
     return when (this) {
         is Result.Success -> this
         is Result.Failure -> {

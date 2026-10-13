@@ -23,6 +23,26 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "com.josense.chirp"
             packageVersion = "1.0.0"
+
+            // 1. macOS 配置：插件会自动将此转化为 Info.plist 中的 CFBundleURLTypes
+            macOS {
+                bundleID = "com.josense.chirp"
+                infoPlist {
+                    extraKeysRawXml = """
+                        <key>CFBundleURLTypes</key>
+                        <array>
+                            <dict>
+                                <key>CFBundleURLName</key>
+                                <string>https://chirp.pl-coding.com/</string>
+                                <key>CFBundleURLSchemes</key>
+                                <array>
+                                    <string>chirp</string>
+                                </array>
+                            </dict>
+                        </array>
+                    """.trimIndent()
+                }
+            }
         }
     }
 }

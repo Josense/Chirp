@@ -88,6 +88,7 @@ class RegisterViewModel(
             authService.register(email, username, password)
                 .onSuccess {
                     _state.update { it.copy(isRegistering = false) }
+                    eventChannel.send(RegisterEvent.Success(email))
                 }.onFailure { error ->
                     val registerError = when (error) {
                         DataError.Remote.CONFLICT -> UiText.Resource(Res.string.error_account_exists)

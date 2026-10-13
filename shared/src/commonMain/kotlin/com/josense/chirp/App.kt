@@ -2,13 +2,18 @@ package com.josense.chirp
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.josense.chirp.navigation.DeepLinkListener
+import com.josense.chirp.navigation.NavigationRoot
 import com.josense.core.designsystem.theme.ChirpTheme
-import com.josense.feature.auth.presentation.register.RegisterRoot
 
 @Composable
 @Preview
 fun App() {
+    val navController = rememberNavController()
+    DeepLinkListener(navController)
+
     ChirpTheme {
-        RegisterRoot(onRegisterSuccess = {})
+        NavigationRoot(navController)
     }
 }

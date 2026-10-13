@@ -1,6 +1,8 @@
 package com.josense.core.data.auth
 
+import com.josense.core.data.dto.request.EmailRequest
 import com.josense.core.data.dto.request.RegisterRequest
+import com.josense.core.data.networking.get
 import com.josense.core.data.networking.post
 import com.josense.core.domain.DataError
 import com.josense.core.domain.EmptyResult
@@ -23,6 +25,24 @@ class KtorAuthService(
                 username = username,
                 password = password
             )
+        )
+    }
+
+    override suspend fun resendVerificationEmail(
+        email: String,
+    ): EmptyResult<DataError.Remote> {
+        return httpClient.post(
+            route = "auth/resend",
+            body = EmailRequest(email)
+        )
+    }
+
+    override suspend fun verifyEmail(
+        token: String
+    ): EmptyResult<DataError.Remote> {
+        return httpClient.get(
+            route = "/auth/verify",
+            queryParams = mapOf("token" to token)
         )
     }
 }
