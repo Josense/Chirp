@@ -33,4 +33,5 @@
     <string name="forgot_password">Forgot password?</string>
     <string name="create_account">Create account</string>
     <string name="error_invalid_credentials">The email or password is incorrect</string>
+    <string name="error_email_not_verified">Unable to login because your email isn't verified</string>
 </resources>

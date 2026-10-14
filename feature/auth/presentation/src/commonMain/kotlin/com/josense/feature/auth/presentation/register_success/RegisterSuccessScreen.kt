@@ -48,7 +48,13 @@ fun RegisterSuccessRoot(
         state = state,
         snackbarHostState = snackbarHostState,
         onLoginClick = onLoginClick,
-        onAction = viewModel::onAction
+        onAction = { action ->
+            when(action) {
+                is RegisterSuccessAction.OnLoginClick -> onLoginClick()
+                else -> Unit
+            }
+            viewModel.onAction(action)
+        },
     )
 }
 

@@ -30,6 +30,7 @@ import com.josense.core.designsystem.components.layouts.ChirpAdaptiveFormLayout
 import com.josense.core.designsystem.components.textfields.ChirpPasswordTextField
 import com.josense.core.designsystem.components.textfields.ChirpTextField
 import com.josense.core.designsystem.theme.ChirpTheme
+import com.josense.core.presentation.util.ObserveAsEvents
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -41,6 +42,12 @@ fun LoginRoot(
     onCreateAccountClick: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+
+    ObserveAsEvents(viewModel.events) { event ->
+        when(event) {
+            LoginEvent.Success -> onLoginSuccess()
+        }
+    }
 
     LoginScreen(
         state = state,
