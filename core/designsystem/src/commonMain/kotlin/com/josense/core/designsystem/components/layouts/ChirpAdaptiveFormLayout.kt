@@ -37,6 +37,7 @@ import com.josense.core.designsystem.components.brand.ChirpBrandLogo
 import com.josense.core.designsystem.theme.ChirpTheme
 import com.josense.core.designsystem.theme.extended
 import com.josense.core.presentation.util.DeviceConfiguration
+import com.josense.core.presentation.util.clearFocusOnTap
 import com.josense.core.presentation.util.currentDeviceConfiguration
 
 @Composable
@@ -58,6 +59,7 @@ fun ChirpAdaptiveFormLayout(
         DeviceConfiguration.MOBILE_PORTRAIT -> {
             ChirpSurface(
                 modifier = modifier
+                    .clearFocusOnTap()
                     .consumeWindowInsets(WindowInsets.navigationBars)
                     .consumeWindowInsets(WindowInsets.displayCutout),
                 header = {
