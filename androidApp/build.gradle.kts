@@ -7,4 +7,5 @@ dependencies {
     implementation(project(":shared"))
 
     implementation(libs.koin.android)
+    implementation(libs.core.splashscreen)
 }
