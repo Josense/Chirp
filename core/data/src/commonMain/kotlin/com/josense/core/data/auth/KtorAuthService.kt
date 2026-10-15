@@ -4,6 +4,7 @@ import com.josense.core.data.dto.AuthInfoSerializable
 import com.josense.core.data.dto.request.EmailRequest
 import com.josense.core.data.dto.request.LoginRequest
 import com.josense.core.data.dto.request.RegisterRequest
+import com.josense.core.data.dto.request.ResetPasswordRequest
 import com.josense.core.data.mappers.toDomain
 import com.josense.core.data.networking.get
 import com.josense.core.data.networking.post
@@ -72,6 +73,19 @@ class KtorAuthService(
         return httpClient.post<EmailRequest, Unit>(
             route = "/auth/forgot-password",
             body = EmailRequest(email)
+        )
+    }
+
+    override suspend fun resetPassword(
+        newPassword: String,
+        token: String
+    ): EmptyResult<DataError.Remote> {
+        return httpClient.post(
+            route = "/auth/reset-password",
+            body = ResetPasswordRequest(
+                newPassword = newPassword,
+                token = token
+            )
         )
     }
 }
