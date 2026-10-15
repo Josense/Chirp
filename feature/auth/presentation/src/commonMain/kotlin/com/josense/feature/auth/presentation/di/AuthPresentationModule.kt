@@ -1,6 +1,7 @@
 package com.josense.feature.auth.presentation.di
 
 import com.josense.feature.auth.presentation.email_verification.EmailVerificationViewModel
+import com.josense.feature.auth.presentation.forgot_password.ForgotPasswordViewModel
 import com.josense.feature.auth.presentation.login.LoginViewModel
 import com.josense.feature.auth.presentation.register.RegisterViewModel
 import com.josense.feature.auth.presentation.register_success.RegisterSuccessViewModel
@@ -12,4 +13,5 @@ val authPresentationModule = module {
     viewModelOf(::RegisterSuccessViewModel)
     viewModelOf(::EmailVerificationViewModel)
     viewModelOf(::LoginViewModel)
+    viewModelOf(::ForgotPasswordViewModel)
 }

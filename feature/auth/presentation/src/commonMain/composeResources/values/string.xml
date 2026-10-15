@@ -9,6 +9,7 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="submit">Submit</string>
     <string name="register">Register</string>
     <string name="username_placeholder">Chirp</string>
     <string name="email_placeholder">hello@chirp.com</string>
@@ -34,4 +35,7 @@
     <string name="create_account">Create account</string>
     <string name="error_invalid_credentials">The email or password is incorrect</string>
     <string name="error_email_not_verified">Unable to login because your email isn't verified</string>
+    <string name="forgot_password_email_sent_successfully">
+        We've successfully sent you an email with a link to reset your password
+    </string>
 </resources>
