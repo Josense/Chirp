@@ -30,6 +30,7 @@ kotlin {
             implementation(libs.jetbrains.lifecycle.compose)
 
             implementation(libs.koin.core)
+            implementation(libs.bundles.koin.common)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

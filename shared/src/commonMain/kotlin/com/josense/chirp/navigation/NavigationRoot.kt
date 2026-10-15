@@ -11,10 +11,13 @@ import com.josense.feature.chat.presentation.chat_list.ChatListRoute
 import com.josense.feature.chat.presentation.chat_list.ChatListScreenRoot
 
 @Composable
-fun NavigationRoot(navController: NavHostController) {
+fun NavigationRoot(
+    navController: NavHostController,
+    startDestination: Any,
+) {
     NavHost(
         navController = navController,
-        startDestination = AuthGraphRoutes.Graph
+        startDestination = startDestination
     ) {
         authGraph(
             navController = navController,
